@@ -1,6 +1,7 @@
 package main;
 
 import java.util.Scanner;
+import java.math.*;
 
 public class BaseConverter {
 	static String decimal = "";
@@ -8,7 +9,7 @@ public class BaseConverter {
 	static String hexadecimal = "";
 	
 	public static void main(String[] args) {
-		binaryToDecimal("1001");
+		inputs();
 	}
 	
 	
@@ -44,7 +45,7 @@ public class BaseConverter {
 				switch(type) {
 					case "decimal":	fromDecimal(number); break;
 					case "binary": 	fromBinary(number);break;
-					case "hex": 	fromHex(number);break;
+					case "hex": 	fromHex(number.toUpperCase());break;
 
 				}
 				
@@ -60,16 +61,17 @@ public class BaseConverter {
 
 
 	private static void fromHex(String number) {
-		
+		hexadecimal = number;
+		long dec = hexToDecimal(number);
+		decimalToBinary(dec);
 	}
-
 
 	private static void fromBinary(String number) {
 		binary = number;
-		int dec = binaryToDecimal(number);
+		long dec = binaryToDecimal(number);
 		decimalToHex(dec);
 	}
-
+	
 
 	private static void fromDecimal(String number) {
 		int dec = Integer.parseInt(number);
@@ -97,9 +99,28 @@ public class BaseConverter {
 		return dec;
 	}
 	
-	private static void decimalToBinary(int dec) {
+	private static int hexToDecimal(String hex) {
+		int numDigits = hex.length();
+		int dec = 0;
+		
+		for(int i = 0; i<numDigits; i++) {
+			int digit = Character.getNumericValue(hex.charAt(i));
+			
+			if(digit>15)
+				throw new IllegalArgumentException("hi");//not hex
+			
+			dec += digit*Math.pow(16, i);
+		}
+		
+		decimal += dec;
+		
+		return dec;
+	}
+	
+	private static void decimalToBinary(long dec) {
 		int exp;
-		int bi = 0;
+		BigInteger bi = new BigInteger("0");
+		BigInteger ten = new BigInteger("10");
 		
 		while(dec>0) {
 			exp = 0;
@@ -108,14 +129,15 @@ public class BaseConverter {
 			}
 			
 			dec -= Math.pow(2, exp); //changing 
-			bi += Math.pow(10, exp); //adding that number to the binary representation
+			bi = bi.add(ten.pow(exp)); //adding that number to the binary representation
 		}
 		
-		binary += bi;
+		System.out.println(bi);
 		
+		binary += bi;
 	}
 
-	private static void decimalToHex(int dec) {
+	private static void decimalToHex(long dec) {
 		int exp;
 		int multiply;
 		
