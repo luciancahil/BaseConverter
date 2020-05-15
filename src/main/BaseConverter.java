@@ -8,8 +8,7 @@ public class BaseConverter {
 	static String hex = "";
 	
 	public static void main(String[] args) {
-		decimalToBinary(11);
-		System.out.println("Hi");
+		inputs();
 	}
 	
 	
@@ -55,6 +54,8 @@ public class BaseConverter {
 				System.out.println(number + " is not valid for " + type);
 			}
 		}
+		
+		output();
 	}
 
 
@@ -77,24 +78,30 @@ public class BaseConverter {
 
 
 	private static void decimalToBinary(int dec) {
-		int bi = 0;
 		int exp;
+		int bi = 0;
 		
 		while(dec>0) {
 			exp = 0;
-			while(dec>=Math.pow(2, exp)) {//finding the smallest power of 2 smaller than dec
+			while(dec>=Math.pow(2, exp+1)) {//finding the smallest power of 2 smaller than dec
 				exp++;
 			}
 			
-			dec -= Math.pow(2, exp-1); //changing 
-			bi+= Math.pow(10, exp-1); //adding that number to the binary representation
+			dec -= Math.pow(2, exp); //changing 
+			bi += Math.pow(10, exp); //adding that number to the binary representation
 		}
 		
-		binary += "" + bi;
+		binary += bi;
 	}
 
 
 	private static void decimalToHex(int dec) {
 		
+	}
+	
+	private static void output() {
+		System.out.println("Decimal: " + decimal);
+		System.out.println("Binary: " + binary);
+		System.out.println("Hexadecimal: " + hex);
 	}
 }
