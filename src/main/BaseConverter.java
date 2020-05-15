@@ -8,7 +8,7 @@ public class BaseConverter {
 	static String hexadecimal = "";
 	
 	public static void main(String[] args) {
-		inputs();
+		binaryToDecimal("1001");
 	}
 	
 	
@@ -65,7 +65,9 @@ public class BaseConverter {
 
 
 	private static void fromBinary(String number) {
-		
+		binary = number;
+		int dec = binaryToDecimal(number);
+		decimalToHex(dec);
 	}
 
 
@@ -77,7 +79,24 @@ public class BaseConverter {
 		System.out.println();
 	}
 
-
+	private static int binaryToDecimal(String bi) {
+		int numDigits = bi.length();
+		int dec = 0;
+		
+		for(int i = 0; i<numDigits; i++) {
+			int digit = Character.getNumericValue(bi.charAt(i));
+			switch(digit) {
+				case 0: break;//do nothing
+				case 1: dec+=Math.pow(2, i);break; //add a power of 2
+				default: throw new IllegalArgumentException("hi");//not binary
+			}
+		}
+		
+		decimal += dec;
+		
+		return dec;
+	}
+	
 	private static void decimalToBinary(int dec) {
 		int exp;
 		int bi = 0;
@@ -96,10 +115,8 @@ public class BaseConverter {
 		
 	}
 
-
 	private static void decimalToHex(int dec) {
 		int exp;
-		int hex = 0;
 		int multiply;
 		
 		System.out.println("hi");
@@ -112,7 +129,7 @@ public class BaseConverter {
 			
 			multiply = (int) (dec/Math.pow(16, exp));//finding how many times the smalles power goes into dec
 			
-			switch(multiply) {
+			switch(multiply) {//decide which symbol to use
 				case 10: hexadecimal += "A";break;
 				case 11: hexadecimal += "B";break;
 				case 12: hexadecimal += "C";break;
