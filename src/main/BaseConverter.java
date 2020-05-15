@@ -24,7 +24,7 @@ public class BaseConverter {
 			switch(nextAction) {
 				case "decimal":	
 				case "binary": 	
-				case "hex": 	EnterNum(input,nextAction); break;
+				case "hex": 	EnterNum(input,nextAction);break;
 				case "done":	isDone = true; break;
 				default: 		System.out.println("I do not recognize that command");
 			}
@@ -58,7 +58,6 @@ public class BaseConverter {
 		output();
 	}
 
-
 	private static void fromHex(String number) {
 		hexadecimal = number;
 		long dec = hexToDecimal(number);
@@ -70,7 +69,6 @@ public class BaseConverter {
 		long dec = binaryToDecimal(number);
 		decimalToHex(dec);
 	}
-	
 
 	private static void fromDecimal(String number) {
 		int dec = Integer.parseInt(number);
@@ -101,10 +99,10 @@ public class BaseConverter {
 	private static int hexToDecimal(String hex) {
 		int numDigits = hex.length();
 		int dec = 0;
-		
+
 		for(int i = 0; i<numDigits; i++) {
 			int digit = Character.getNumericValue(hex.charAt(numDigits -1- i));
-			
+
 			if(digit>15)
 				throw new IllegalArgumentException("hi");//not hex
 			
