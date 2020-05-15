@@ -12,7 +12,6 @@ public class BaseConverter {
 		inputs();
 	}
 	
-	
 	private static void inputs(){
 		Scanner input = new Scanner(System.in);
 		boolean isDone = false;
@@ -104,7 +103,7 @@ public class BaseConverter {
 		int dec = 0;
 		
 		for(int i = 0; i<numDigits; i++) {
-			int digit = Character.getNumericValue(hex.charAt(i));
+			int digit = Character.getNumericValue(hex.charAt(numDigits -1- i));
 			
 			if(digit>15)
 				throw new IllegalArgumentException("hi");//not hex
@@ -131,8 +130,6 @@ public class BaseConverter {
 			dec -= Math.pow(2, exp); //changing 
 			bi = bi.add(ten.pow(exp)); //adding that number to the binary representation
 		}
-		
-		System.out.println(bi);
 		
 		binary += bi;
 	}
