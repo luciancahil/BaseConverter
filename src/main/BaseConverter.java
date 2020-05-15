@@ -3,7 +3,7 @@ package main;
 import java.util.Scanner;
 
 public class BaseConverter {
-	int decimal = 0;
+	String decimal = "";
 	String binary = "";
 	String hex = "";
 	
@@ -22,31 +22,21 @@ public class BaseConverter {
 			nextAction = input.nextLine().toLowerCase();
 			
 			switch(nextAction) {
-				case "decimal":	fromDecimal(); break;
-				case "binary": 	fromBinary();break;
-				case "hex": 	fromHex();break;
+				case "decimal":	
+				case "binary": 	
+				case "hex": 	EnterNum(input,nextAction); break;
 				case "done":	isDone = true; break;
-				default: 			System.out.println("I do not recognize that command");
+				default: 		System.out.println("I do not recognize that command");
 			}
 		}
 		input.close();
 	}
-
-
-	private static void fromHex() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	private static void fromBinary() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	private static void fromDecimal() {
-		// TODO Auto-generated method stub
-		
+	
+	private static void EnterNum(Scanner input, String type) {
+		try {
+			int n = 12/0;
+		}catch(Exception e) {
+			System.out.println("error!");
+		}
 	}
 }
