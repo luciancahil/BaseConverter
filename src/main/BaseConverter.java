@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class BaseConverter {
 	static String decimal = "";
 	static String binary = "";
-	static String hex = "";
+	static String hexadecimal = "";
 	
 	public static void main(String[] args) {
 		inputs();
@@ -74,6 +74,7 @@ public class BaseConverter {
 		decimal = number;
 		decimalToHex(dec);
 		decimalToBinary(dec);
+		System.out.println();
 	}
 
 
@@ -92,16 +93,42 @@ public class BaseConverter {
 		}
 		
 		binary += bi;
+		
 	}
 
 
 	private static void decimalToHex(int dec) {
+		int exp;
+		int hex = 0;
+		int multiply;
 		
+		System.out.println("hi");
+		
+		while(dec>0) {
+			exp = 0;
+			while(dec>=Math.pow(16, exp+1)) {//finding the smallest power of 16 smaller than dec
+				exp++;
+			}
+			
+			multiply = (int) (dec/Math.pow(16, exp));//finding how many times the smalles power goes into dec
+			
+			switch(multiply) {
+				case 10: hexadecimal += "A";break;
+				case 11: hexadecimal += "B";break;
+				case 12: hexadecimal += "C";break;
+				case 13: hexadecimal += "D";break;
+				case 14: hexadecimal += "E";break;
+				case 15: hexadecimal += "F";break;
+				default: hexadecimal += multiply;
+			}
+			
+			dec -= multiply*Math.pow(16, exp); //changing 
+		}
 	}
 	
 	private static void output() {
 		System.out.println("Decimal: " + decimal);
 		System.out.println("Binary: " + binary);
-		System.out.println("Hexadecimal: " + hex);
+		System.out.println("Hexadecimal: " + hexadecimal);
 	}
 }
