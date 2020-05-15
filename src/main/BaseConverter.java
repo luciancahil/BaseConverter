@@ -3,9 +3,9 @@ package main;
 import java.util.Scanner;
 
 public class BaseConverter {
-	String decimal = "";
-	String binary = "";
-	String hex = "";
+	static String decimal = "";
+	static String binary = "";
+	static String hex = "";
 	
 	public static void main(String[] args) {
 		inputs();
@@ -33,10 +33,41 @@ public class BaseConverter {
 	}
 	
 	private static void EnterNum(Scanner input, String type) {
-		try {
-			int n = 12/0;
-		}catch(Exception e) {
-			System.out.println("error!");
+		boolean isValid = false;
+		String number = "";
+		
+		while(!isValid) {
+			try {
+				System.out.println("Please enter a number:");
+				number = input.nextLine();
+				
+				switch(type) {
+					case "decimal":	fromDecimal(number); break;
+					case "binary": 	fromBinary(number);break;
+					case "hex": 	fromHex(number);break;
+
+				}
+				
+				isValid = true;
+			}catch(Exception e) {
+				System.out.println("ERROR!");
+				System.out.println(number + " is not valid for " + type);
+			}
 		}
+	}
+
+
+	private static void fromHex(String number) {
+		
+	}
+
+
+	private static void fromBinary(String number) {
+		
+	}
+
+
+	private static void fromDecimal(String number) {
+		
 	}
 }
